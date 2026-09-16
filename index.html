@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Venn | Earn 2% Interest on Operating Cash & Automate Expenses</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+          },
+          colors: {
+            venn: {
+              50: '#f0fbf4',
+              100: '#dcf6e5',
+              200: '#bbf0ce',
+              500: '#008751', /* Venn Brand Primary Green */
+              600: '#007545',
+              700: '#005f38',
+              800: '#004c2d',
+              dark: '#0a0d12',
+              slate: '#475467',
+              border: '#eaecf0',
+              surface: '#f9fafb'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Venn brand custom range slider */
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      background: transparent;
+    }
+    input[type=range]:focus {
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 8px;
+      cursor: pointer;
+      background: #e2e8f0;
+      border-radius: 9999px;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      height: 24px;
+      width: 24px;
+      border-radius: 50%;
+      background: #008751;
+      cursor: pointer;
+      -webkit-appearance: none;
+      margin-top: -8px;
+      box-shadow: 0 2px 6px rgba(0, 135, 81, 0.4), 0 0 0 3px #ffffff;
+      transition: transform 0.15s ease;
+    }
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+    input[type=range]::-moz-range-track {
+      width: 100%;
+      height: 8px;
+      cursor: pointer;
+      background: #e2e8f0;
+      border-radius: 9999px;
+    }
+    input[type=range]::-moz-range-thumb {
+      height: 24px;
+      width: 24px;
+      border-radius: 50%;
+      background: #008751;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 135, 81, 0.4), 0 0 0 3px #ffffff;
+    }
+    /* Subtle Venn grid pattern */
+    .venn-grid-bg {
+      background-image: radial-gradient(rgba(0, 135, 81, 0.06) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+  </style>
+</head>
+<body class="bg-white text-slate-800 font-sans antialiased selection:bg-[#008751] selection:text-white">
+
+  <!-- Top Callout Banner: Non-disruptive module for existing card/account traffic (Point 4 from slide) -->
+  <div id="announcement-banner" class="bg-[#008751] text-white px-4 py-2.5 text-xs sm:text-sm font-medium relative z-50 transition-all">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2 mx-auto sm:mx-0 flex-wrap justify-center sm:justify-start">
+        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-white text-[#008751] uppercase tracking-wide">
+          <i class="fa-solid fa-sparkles text-[9px]"></i> Product Update
+        </span>
+        <span>All CAD &amp; USD operating accounts now automatically earn <strong class="underline decoration-white/50 font-bold">2.00% annual interest</strong> with zero lockups or minimums.</span>
+        <a href="#calculator" class="inline-flex items-center gap-1 font-bold text-white hover:text-emerald-100 underline underline-offset-2 ml-1">
+          Calculate your return &rarr;
+        </a>
+      </div>
+      <button onclick="document.getElementById('announcement-banner').style.display='none'" class="hidden sm:inline-flex text-white/80 hover:text-white text-base">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  </div>
+
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="h-20 flex items-center justify-between gap-4">
+        
+        <!-- Left: Authentic Venn Logo (Exact vertical & baseline alignment) -->
+        <div class="flex items-center min-w-[140px] sm:min-w-[180px]">
+          <a href="#" class="flex items-center gap-2.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#008751] rounded-lg p-1" aria-label="Venn Homepage">
+            <!-- Venn SVG Logo Mark matching uploaded Venn_GRN_BLK_Logo_10x-p-1080.png -->
+            <svg class="w-8 h-8 sm:w-9 sm:h-9 shrink-0 group-hover:scale-105 transition-transform" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Top vertical ray -->
+              <path d="M50 4 V42" stroke="#008751" stroke-width="13" stroke-linecap="round"/>
+              <!-- Top-left ray -->
+              <path d="M19 23 L44 45" stroke="#008751" stroke-width="13" stroke-linecap="round"/>
+              <!-- Top-right ray -->
+              <path d="M81 23 L56 45" stroke="#008751" stroke-width="13" stroke-linecap="round"/>
+              <!-- Center wavy bridge arch connecting the horizontal arms -->
+              <path d="M4 51 H36 C42 51, 44 42, 50 42 C56 42, 58 51, 64 51 H96" stroke="#008751" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Bottom-left leg -->
+              <path d="M22 88 L43 56" stroke="#008751" stroke-width="13" stroke-linecap="round"/>
+              <!-- Bottom-right leg -->
+              <path d="M78 88 L57 56" stroke="#008751" stroke-width="13" stroke-linecap="round"/>
+            </svg>
+            <!-- 'venn' typography in black geometric bold with optical baseline alignment -->
+            <span class="font-extrabold text-2xl sm:text-[28px] tracking-tight text-black font-sans leading-none select-none pt-0.5">venn</span>
+          </a>
+        </div>
+
+        <!-- Center: Desktop Nav Links (Balanced alignment with hover pill effect) -->
+        <nav class="hidden lg:flex items-center justify-center gap-1 xl:gap-2 text-sm font-semibold text-slate-600 flex-1">
+          <a href="#calculator" class="px-3 py-2 rounded-lg hover:text-[#008751] hover:bg-emerald-50/70 transition-all flex items-center gap-1.5">
+            <span>Yield Calculator</span>
+          </a>
+          <a href="#comparison" class="px-3 py-2 rounded-lg hover:text-[#008751] hover:bg-emerald-50/70 transition-all">
+            <span>Venn vs. Big 5</span>
+          </a>
+          <a href="#expense" class="px-3 py-2 rounded-lg hover:text-[#008751] hover:bg-emerald-50/70 transition-all">
+            <span>Expense Automation</span>
+          </a>
+          <a href="#cards" class="px-3 py-2 rounded-lg hover:text-[#008751] hover:bg-emerald-50/70 transition-all">
+            <span>Corporate Cards</span>
+          </a>
+          <a href="#trust" class="px-3 py-2 rounded-lg hover:text-[#008751] hover:bg-emerald-50/70 transition-all flex items-center gap-1.5">
+            <i class="fa-solid fa-shield-halved text-[#008751] text-xs"></i>
+            <span>CDIC Protection</span>
+          </a>
+        </nav>
+
+        <!-- Right: Actions & Mobile Hamburger (Vertically aligned) -->
+        <div class="flex items-center justify-end gap-2.5 sm:gap-3 min-w-[140px] sm:min-w-[180px]">
+          <button onclick="openModal('Book a Mid-Market Demo (50-200 Employees)')" class="hidden sm:inline-flex items-center justify-center text-xs sm:text-sm font-semibold px-3.5 sm:px-4 py-2.5 rounded-lg border border-slate-200 hover:border-slate-400 text-slate-700 hover:text-black hover:bg-slate-50 transition-all whitespace-nowrap">
+            Book Demo
+          </button>
+          <button onclick="openModal('Open Account (1-50 Employees)')" class="inline-flex items-center justify-center gap-2 text-xs sm:text-sm font-bold px-3.5 sm:px-5 py-2.5 rounded-lg bg-[#008751] hover:bg-[#007545] text-white shadow-sm hover:shadow transition-all whitespace-nowrap">
+            <span>Open Account</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </button>
+
+          <!-- Mobile Hamburger Toggle Button -->
+          <button id="mobile-menu-toggle" onclick="toggleMobileNav()" class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-slate-200 text-slate-600 hover:text-black hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#008751]" aria-label="Toggle navigation menu" aria-expanded="false">
+            <i id="mobile-menu-icon" class="fa-solid fa-bars text-base"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Responsive Mobile Dropdown Menu -->
+    <div id="mobile-nav-menu" class="hidden lg:hidden border-t border-slate-100 bg-white px-4 pt-3 pb-6 space-y-1 shadow-lg animate-fadeIn">
+      <a href="#calculator" onclick="toggleMobileNav()" class="flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:text-[#008751] hover:bg-emerald-50/70 transition-colors">
+        <span class="flex items-center gap-2.5">
+          <i class="fa-solid fa-calculator text-[#008751] w-4"></i> Yield Calculator
+        </span>
+        <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
+      </a>
+      <a href="#comparison" onclick="toggleMobileNav()" class="flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:text-[#008751] hover:bg-emerald-50/70 transition-colors">
+        <span class="flex items-center gap-2.5">
+          <i class="fa-solid fa-scale-balanced text-[#008751] w-4"></i> Venn vs. Big 5 &amp; Float
+        </span>
+        <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
+      </a>
+      <a href="#expense" onclick="toggleMobileNav()" class="flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:text-[#008751] hover:bg-emerald-50/70 transition-colors">
+        <span class="flex items-center gap-2.5">
+          <i class="fa-solid fa-receipt text-[#008751] w-4"></i> Expense Automation
+        </span>
+        <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
+      </a>
+      <a href="#cards" onclick="toggleMobileNav()" class="flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:text-[#008751] hover:bg-emerald-50/70 transition-colors">
+        <span class="flex items-center gap-2.5">
+          <i class="fa-solid fa-credit-card text-[#008751] w-4"></i> Corporate Cards (1% Cashback)
+        </span>
+        <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
+      </a>
+      <a href="#trust" onclick="toggleMobileNav()" class="flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:text-[#008751] hover:bg-emerald-50/70 transition-colors">
+        <span class="flex items-center gap-2.5">
+          <i class="fa-solid fa-shield-halved text-[#008751] w-4"></i> CDIC Protection &amp; Trust
+        </span>
+        <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
+      </a>
+      <div class="pt-3 mt-2 border-t border-slate-100 flex flex-col gap-2">
+        <button onclick="toggleMobileNav(); openModal('Book a Mid-Market Demo (50-200 Employees)')" class="w-full text-center text-sm font-semibold px-4 py-2.5 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-50">
+          Book Mid-Market Demo
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section (Dedicated Interest-Angle Page - Point 1 from slide) -->
+  <section class="relative pt-12 pb-16 sm:pt-16 sm:pb-24 venn-grid-bg border-b border-slate-100 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Headline & Subtitle -->
+      <div class="text-center max-w-3xl mx-auto">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#e6f4ea] text-[#008751] border border-[#bbf0ce] mb-6 shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-[#008751] animate-pulse"></span>
+          <span>Automatic 2.00% Interest on CAD &amp; USD Balances</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-950 tracking-tight leading-[1.12] mb-6">
+          Turn Operating Cash into Yield. <br class="hidden sm:inline"/>
+          <span class="text-[#008751]">Automate Every Expense.</span>
+        </h1>
+
+        <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto mb-8 font-normal">
+          Traditional Canadian banks charge monthly fees while paying 0% on your business cash. Venn automatically credits <strong>2.00% annual interest</strong> on all CAD &amp; USD balances, paired with smart corporate cards and automated receipt reconciliation.
+        </p>
+
+        <!-- CTA Row -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5">
+          <button onclick="openModal('Instant Account Setup (Apply in 5 Mins)')" class="w-full sm:w-auto px-7 py-3.5 rounded-lg font-bold text-white bg-[#008751] hover:bg-[#007545] shadow-md hover:shadow-lg transition-all text-sm flex items-center justify-center gap-2">
+            <i class="fa-solid fa-bolt text-xs"></i>
+            <span>Apply Online in 5 Minutes</span>
+          </button>
+          <a href="#calculator" class="w-full sm:w-auto px-6 py-3.5 rounded-lg font-semibold text-slate-800 hover:text-black bg-white border border-slate-200 hover:border-slate-300 shadow-sm transition-all text-sm flex items-center justify-center gap-2">
+            <i class="fa-solid fa-calculator text-[#008751]"></i>
+            <span>Calculate Your Return</span>
+          </a>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs font-semibold text-slate-500">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-shield-halved text-[#008751]"></i>
+            <span>CDIC-Eligible Protection up to $100K</span>
+          </div>
+          <div class="h-3.5 w-px bg-slate-200 hidden sm:block"></div>
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-building-columns text-[#008751]"></i>
+            <span>Approved Payment Service Provider</span>
+          </div>
+          <div class="h-3.5 w-px bg-slate-200 hidden sm:block"></div>
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-users text-[#008751]"></i>
+            <span>15,000+ Canadian Businesses</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Component 1 Core Asset: Interactive Dollar Yield Calculator -->
+      <div id="calculator" class="mt-14 max-w-4xl mx-auto rounded-2xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 p-6 sm:p-10 relative">
+        <div class="absolute -top-3.5 left-8 px-3.5 py-1 rounded-full bg-[#008751] text-white text-[11px] font-extrabold uppercase tracking-wider shadow-sm">
+          Interactive Yield &amp; Fee Savings Calculator
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch pt-2">
+          
+          <!-- Controls (Left 7 Cols) -->
+          <div class="lg:col-span-7 flex flex-col justify-between space-y-6">
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <label class="text-sm font-bold text-slate-900">Average Operating Cash Balance</label>
+                <div class="inline-flex rounded-lg bg-slate-100 p-1 border border-slate-200 text-xs font-bold">
+                  <button id="calc-cad-btn" onclick="setCurrency('CAD')" class="px-3 py-1 rounded-md bg-[#008751] text-white shadow-xs transition-all">CAD</button>
+                  <button id="calc-usd-btn" onclick="setCurrency('USD')" class="px-3 py-1 rounded-md text-slate-600 hover:text-black transition-all">USD</button>
+                </div>
+              </div>
+
+              <div class="flex items-baseline justify-between gap-4 mt-2">
+                <span id="calc-balance-display" class="text-3xl sm:text-4xl font-extrabold text-slate-950 tracking-tight">$150,000</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded bg-emerald-50 text-[#008751] border border-emerald-100">Automatic 2.00% APY</span>
+              </div>
+
+              <div class="mt-3">
+                <input type="range" id="calc-balance-slider" min="10000" max="1500000" step="10000" value="150000" oninput="runCalculator()">
+                <div class="flex justify-between text-[11px] text-slate-400 font-semibold mt-1.5">
+                  <span>$10,000</span>
+                  <span>$500,000</span>
+                  <span>$1,000,000</span>
+                  <span>$1,500,000+</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Spend Slider -->
+            <div class="pt-2 border-t border-slate-100">
+              <div class="flex justify-between items-center mb-1">
+                <label class="text-sm font-bold text-slate-900">Estimated Monthly Corporate Card Spend</label>
+                <span id="calc-spend-display" class="text-sm font-bold text-[#008751]">$15,000 / mo</span>
+              </div>
+              <p class="text-xs text-slate-500 mb-2">Venn cards earn 1% unlimited cashback on every dollar.</p>
+              <input type="range" id="calc-spend-slider" min="2000" max="100000" step="1000" value="15000" oninput="runCalculator()">
+              <div class="flex justify-between text-[11px] text-slate-400 font-semibold mt-1.5">
+                <span>$2,000/mo</span>
+                <span>$50,000/mo</span>
+                <span>$100,000/mo</span>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-lg bg-slate-50 border border-slate-100 text-xs text-slate-600 leading-relaxed">
+              <i class="fa-solid fa-circle-info text-[#008751] mr-1"></i>
+              Calculated using 2.00% annual interest credited monthly, 1% cashback on team spend, and ~$1,440/yr saved on legacy bank maintenance &amp; transfer fees.
+            </div>
+          </div>
+
+          <!-- Dollar Output Card (Right 5 Cols) -->
+          <div class="lg:col-span-5 bg-gradient-to-b from-[#0a0d12] to-[#121824] rounded-xl text-white p-6 sm:p-7 flex flex-col justify-between shadow-lg">
+            <div>
+              <span class="text-xs font-extrabold uppercase tracking-wider text-emerald-400">Total 1-Year Financial Advantage</span>
+              <div class="mt-2">
+                <div id="calc-total-return" class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
+                  +$6,240
+                </div>
+                <p class="text-xs text-slate-300 mt-1">Direct dollar gain compared to traditional Canadian Big 5 banks</p>
+              </div>
+            </div>
+
+            <div class="space-y-3 pt-6 border-t border-slate-800 text-xs sm:text-sm">
+              <div class="flex justify-between items-center">
+                <span class="text-slate-300 flex items-center gap-1.5">
+                  <i class="fa-solid fa-chart-line text-[#008751]"></i> 2% Interest Yield
+                </span>
+                <span id="calc-interest-row" class="font-bold text-white">+$3,000 / yr</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-300 flex items-center gap-1.5">
+                  <i class="fa-solid fa-credit-card text-[#008751]"></i> 1% Card Cashback
+                </span>
+                <span id="calc-cashback-row" class="font-bold text-white">+$1,800 / yr</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-300 flex items-center gap-1.5">
+                  <i class="fa-solid fa-ban text-[#008751]"></i> Big 5 Fees Avoided
+                </span>
+                <span class="font-bold text-white">+$1,440 / yr</span>
+              </div>
+            </div>
+
+            <div class="pt-6">
+              <button onclick="openModal('Claim Your 2% Yield Account')" class="w-full py-3.5 rounded-lg font-bold text-sm bg-[#008751] hover:bg-[#007545] text-white transition-all shadow-md">
+                Claim This Yield with Venn &rarr;
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Component 2 & 3 from Slide: Comparison Table Module + Competitor-Conquest Pages ("Venn vs. Big 5" & "Venn vs. Float") -->
+  <section id="comparison" class="py-16 sm:py-24 bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs font-extrabold uppercase tracking-wider text-[#008751] bg-[#e6f4ea] px-3 py-1 rounded-full border border-[#bbf0ce]">
+          Objective Platform Comparison
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 mt-4 tracking-tight">
+          How Venn Compares to Legacy Banks &amp; Other Platforms
+        </h2>
+        <p class="text-slate-600 mt-3 text-base">
+          Venn wins across every metric—even when evaluated beyond interest alone. No monthly maintenance fees, 1% cashback cards, native multi-currency accounts, and automated receipt matching.
+        </p>
+
+        <!-- Conquest Switcher Tabs (Point 3 from slide: "Venn vs. Float" and "Venn vs. Big 5") -->
+        <div class="inline-flex rounded-xl bg-white border border-slate-200 p-1.5 mt-8 shadow-xs gap-1">
+          <button id="tab-big5" onclick="setComparison('big5')" class="px-4 sm:px-6 py-2 rounded-lg text-xs sm:text-sm font-bold bg-[#008751] text-white shadow-xs transition-all">
+            Venn vs. Big 5 Canadian Banks
+          </button>
+          <button id="tab-float" onclick="setComparison('float')" class="px-4 sm:px-6 py-2 rounded-lg text-xs sm:text-sm font-bold text-slate-600 hover:text-black transition-all">
+            Venn vs. Float &amp; Fintech Cards
+          </button>
+        </div>
+      </div>
+
+      <!-- Comparison Matrix Table -->
+      <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm bg-white">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="border-b border-slate-200 bg-slate-50/70">
+              <th class="py-4 px-6 text-xs font-extrabold text-slate-500 uppercase tracking-wider w-2/5">Capabilities &amp; Features</th>
+              <th class="py-4 px-6 text-sm font-extrabold text-[#008751] bg-[#f0fbf4] border-x border-[#bbf0ce] w-1/4">
+                <div class="flex items-center gap-2">
+                  <div class="w-6 h-6 rounded-md bg-[#008751] text-white flex items-center justify-center text-xs font-black">V</div>
+                  <span>Venn Platform</span>
+                </div>
+              </th>
+              <th id="comp-table-header" class="py-4 px-6 text-xs font-extrabold text-slate-600 uppercase tracking-wider w-1/3">
+                Big 5 Banks (RBC, TD, BMO, CIBC, Scotiabank)
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-sm">
+            
+            <!-- Row 1: Operating Interest -->
+            <tr class="hover:bg-slate-50/60 transition-colors">
+              <td class="py-4 px-6 font-semibold text-slate-900">
+                Automatic Operating Cash Interest
+                <span class="block text-xs font-normal text-slate-500 mt-0.5">Applied to daily CAD &amp; USD balances with zero lockups</span>
+              </td>
+              <td class="py-4 px-6 font-bold text-[#008751] bg-[#f0fbf4] border-x border-[#bbf0ce]">
+                <div class="flex items-center gap-1.5">
+                  <i class="fa-solid fa-circle-check text-[#008751]"></i>
+                  <span>2.00% Automatic APY</span>
+                </div>
+              </td>
+              <td id="comp-row-interest" class="py-4 px-6 text-slate-600">
+                0.00% (or required term GIC lockups)
+              </td>
+            </tr>
+
+            <!-- Row 2: Expense Management & Receipt Capture -->
+            <tr class="hover:bg-slate-50/60 transition-colors">
+              <td class="py-4 px-6 font-semibold text-slate-900">
+                Automated Expense Management &amp; Receipt Capture
+                <span class="block text-xs font-normal text-slate-500 mt-0.5">Instant SMS receipt prompt, automated OCR matching to card transactions</span>
+              </td>
+              <td class="py-4 px-6 font-bold text-[#008751] bg-[#f0fbf4] border-x border-[#bbf0ce]">
+                <div class="flex items-center gap-1.5">
+                  <i class="fa-solid fa-circle-check text-[#008751]"></i>
+                  <span>Included Free (Native)</span>
+                </div>
+              </td>
+              <td id="comp-row-expense" class="py-4 px-6 text-slate-600">
+                None (requires 3rd-party software like Expensify)
+              </td>
+            </tr>
+
+            <!-- Row 3: Corporate Cards & Cashback -->
+            <tr class="hover:bg-slate-50/60 transition-colors">
+              <td class="py-4 px-6 font-semibold text-slate-900">
+                Corporate Cards &amp; Cashback
+                <span class="block text-xs font-normal text-slate-500 mt-0.5">Unlimited physical and virtual cards with granular merchant spend limits</span>
+              </td>
+              <td class="py-4 px-6 font-bold text-[#008751] bg-[#f0fbf4] border-x border-[#bbf0ce]">
+                <div class="flex items-center gap-1.5">
+                  <i class="fa-solid fa-circle-check text-[#008751]"></i>
+                  <span>1% Unlimited Cashback</span>
+                </div>
+              </td>
+              <td id="comp-row-cards" class="py-4 px-6 text-slate-600">
+                Points with caps or <0.5% effective rebate
+              </td>
+            </tr>
+
+            <!-- Row 4: Account & Wire Fees -->
+            <tr class="hover:bg-slate-50/60 transition-colors">
+              <td class="py-4 px-6 font-semibold text-slate-900">
+                Monthly Account &amp; Wire Fees
+                <span class="block text-xs font-normal text-slate-500 mt-0.5">Monthly fee, free local transfers (Interac e-Transfer, EFT, ACH)</span>
+              </td>
+              <td class="py-4 px-6 font-bold text-[#008751] bg-[#f0fbf4] border-x border-[#bbf0ce]">
+                <div class="flex items-center gap-1.5">
+                  <i class="fa-solid fa-circle-check text-[#008751]"></i>
+                  <span>$0 Monthly / Free Local Wires</span>
+                </div>
+              </td>
+              <td id="comp-row-fees" class="py-4 px-6 text-slate-600">
+                $50–$120 / month + $30–$45 per wire
+              </td>
+            </tr>
+
+            <!-- Row 5: Multi-Currency & FX Markup -->
+            <tr class="hover:bg-slate-50/60 transition-colors">
+              <td class="py-4 px-6 font-semibold text-slate-900">
+                Multi-Currency (CAD, USD, EUR, GBP)
+                <span class="block text-xs font-normal text-slate-500 mt-0.5">Hold local balances with transparent institutional FX rates</span>
+              </td>
+              <td class="py-4 px-6 font-bold text-[#008751] bg-[#f0fbf4] border-x border-[#bbf0ce]">
+                <div class="flex items-center gap-1.5">
+                  <i class="fa-solid fa-circle-check text-[#008751]"></i>
+                  <span>0.25% Transparent FX</span>
+                </div>
+              </td>
+              <td id="comp-row-fx" class="py-4 px-6 text-slate-600">
+                Separate accounts + 2.5% to 3.5% FX markup
+              </td>
+            </tr>
+
+            <!-- Row 6: CDIC Trust Protection -->
+            <tr class="hover:bg-slate-50/60 transition-colors">
+              <td class="py-4 px-6 font-semibold text-slate-900">
+                Deposit Protection Framework
+                <span class="block text-xs font-normal text-slate-500 mt-0.5">Eligible deposit insurance on business operational cash</span>
+              </td>
+              <td class="py-4 px-6 font-bold text-[#008751] bg-[#f0fbf4] border-x border-[#bbf0ce]">
+                <div class="flex items-center gap-1.5">
+                  <i class="fa-solid fa-circle-check text-[#008751]"></i>
+                  <span>CDIC-Eligible Protection (to $100k)</span>
+                </div>
+              </td>
+              <td id="comp-row-cdic" class="py-4 px-6 text-slate-600">
+                CDIC Member Institution
+              </td>
+            </tr>
+
+            <!-- Row 7: Two-Way Accounting Sync -->
+            <tr class="hover:bg-slate-50/60 transition-colors">
+              <td class="py-4 px-6 font-semibold text-slate-900">
+                Continuous 2-Way Accounting Sync
+                <span class="block text-xs font-normal text-slate-500 mt-0.5">Live bidirectional sync with QuickBooks Online &amp; Xero</span>
+              </td>
+              <td class="py-4 px-6 font-bold text-[#008751] bg-[#f0fbf4] border-x border-[#bbf0ce]">
+                <div class="flex items-center gap-1.5">
+                  <i class="fa-solid fa-circle-check text-[#008751]"></i>
+                  <span>Real-Time Two-Way Sync</span>
+                </div>
+              </td>
+              <td id="comp-row-sync" class="py-4 px-6 text-slate-600">
+                Lagged bank feeds with regular token disconnects
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-center text-xs text-slate-400 mt-6">
+        Independent comparison based on publicly advertised business fees and platform terms as of September 2026.
+      </p>
+    </div>
+  </section>
+
+  <!-- Expense Management Feature Deep Dive -->
+  <section id="expense" class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-xs font-extrabold uppercase tracking-wider text-[#008751] bg-[#e6f4ea] px-3 py-1 rounded-full border border-[#bbf0ce]">
+        Built-In Expense Stack
+      </span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 mt-4 tracking-tight">
+        Eliminate Expense Reports. Close Your Books 10x Faster.
+      </h2>
+      <p class="text-slate-600 mt-3 text-base">
+        Every dollar spent on Venn corporate cards is tracked, receipt-matched, and reconciled automatically. No more paper receipts stuffed into shoeboxes or chaotic month-end spreadsheets.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <!-- Card 1: Instant Receipt Matching -->
+      <div class="rounded-xl border border-slate-200 p-8 bg-white hover:border-[#008751] transition-all hover:shadow-lg flex flex-col justify-between">
+        <div>
+          <div class="w-12 h-12 rounded-lg bg-[#e6f4ea] text-[#008751] flex items-center justify-center text-xl mb-6">
+            <i class="fa-solid fa-receipt"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-950 mb-3">Instant Receipt Capture</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Team members tap their card and immediately receive an SMS prompt. Snap a photo of the receipt and Venn's AI OCR automatically extracts merchant, taxes, and line items.
+          </p>
+        </div>
+        <div class="mt-6 pt-6 border-t border-slate-100 flex items-center text-xs font-bold text-[#008751]">
+          <span>Zero manual data entry</span>
+          <i class="fa-solid fa-check ml-2"></i>
+        </div>
+      </div>
+
+      <!-- Card 2: Granular Spend Limits -->
+      <div class="rounded-xl border border-slate-200 p-8 bg-white hover:border-[#008751] transition-all hover:shadow-lg flex flex-col justify-between">
+        <div>
+          <div class="w-12 h-12 rounded-lg bg-[#e6f4ea] text-[#008751] flex items-center justify-center text-xl mb-6">
+            <i class="fa-solid fa-sliders"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-950 mb-3">Custom Spend Controls</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Assign custom daily, weekly, or monthly limits for any employee. Restrict spending by merchant category (software, dining, travel) or freeze cards in one click.
+          </p>
+        </div>
+        <div class="mt-6 pt-6 border-t border-slate-100 flex items-center text-xs font-bold text-[#008751]">
+          <span>Prevent unauthorized overspend</span>
+          <i class="fa-solid fa-check ml-2"></i>
+        </div>
+      </div>
+
+      <!-- Card 3: Two-Way Accounting Sync -->
+      <div class="rounded-xl border border-slate-200 p-8 bg-white hover:border-[#008751] transition-all hover:shadow-lg flex flex-col justify-between">
+        <div>
+          <div class="w-12 h-12 rounded-lg bg-[#e6f4ea] text-[#008751] flex items-center justify-center text-xl mb-6">
+            <i class="fa-solid fa-arrows-rotate"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-950 mb-3">Continuous 2-Way Sync</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Direct integrations with QuickBooks Online and Xero map your chart of accounts automatically. Month-end bookkeeping that once took days now closes in under 15 minutes.
+          </p>
+        </div>
+        <div class="mt-6 pt-6 border-t border-slate-100 flex items-center text-xs font-bold text-[#008751]">
+          <span>Audit-ready financial books</span>
+          <i class="fa-solid fa-check ml-2"></i>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Corporate Card Section -->
+  <section id="cards" class="py-16 bg-slate-900 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <div class="lg:col-span-6 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-[#008751]/30 text-emerald-400 border border-[#008751]/50">
+            <span>Canada's #1 Ranked Corporate Card</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+            1% Unlimited Cashback on Every Transaction
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            Issue unlimited physical and virtual cards for your team in seconds. Spend $200,000 this month, earn $2,000 automatically credited to your operating balance next month. No points gimmicks, no categories to juggle.
+          </p>
+
+          <div class="grid grid-cols-2 gap-4 pt-2">
+            <div class="p-4 rounded-lg bg-slate-800/80 border border-slate-700">
+              <div class="text-2xl font-extrabold text-[#008751]">1.00%</div>
+              <div class="text-xs text-slate-400 mt-1">Uncapped monthly cashback</div>
+            </div>
+            <div class="p-4 rounded-lg bg-slate-800/80 border border-slate-700">
+              <div class="text-2xl font-extrabold text-white">Infinite</div>
+              <div class="text-xs text-slate-400 mt-1">Virtual &amp; physical cards</div>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button onclick="openModal('Get Started with Venn Corporate Cards')" class="px-6 py-3.5 rounded-lg bg-[#008751] hover:bg-[#007545] font-bold text-sm text-white transition-all shadow-md">
+              Get Started with Corporate Cards &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- Sleek Card Visual representation -->
+        <div class="lg:col-span-6 flex justify-center">
+          <div class="w-full max-w-md h-64 rounded-2xl p-7 bg-gradient-to-tr from-black via-slate-900 to-[#008751]/40 border border-slate-700 shadow-2xl relative flex flex-col justify-between overflow-hidden">
+            <div class="flex justify-between items-center">
+              <!-- Venn Logo on Card -->
+              <div class="flex items-center gap-2">
+                <svg class="w-6 h-6" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M50 4 V42" stroke="#008751" stroke-width="13" stroke-linecap="round"/>
+                  <path d="M19 23 L44 45" stroke="#008751" stroke-width="13" stroke-linecap="round"/>
+                  <path d="M81 23 L56 45" stroke="#008751" stroke-width="13" stroke-linecap="round"/>
+                  <path d="M4 51 H36 C42 51, 44 42, 50 42 C56 42, 58 51, 64 51 H96" stroke="#008751" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M22 88 L43 56" stroke="#008751" stroke-width="13" stroke-linecap="round"/>
+                  <path d="M78 88 L57 56" stroke="#008751" stroke-width="13" stroke-linecap="round"/>
+                </svg>
+                <span class="font-extrabold text-white text-lg tracking-tight">venn</span>
+              </div>
+              <span class="text-xs font-semibold px-2 py-0.5 rounded bg-white/10 text-slate-300">Corporate</span>
+            </div>
+
+            <div class="space-y-1">
+              <div class="text-xs tracking-widest text-slate-400 uppercase">Operational Float &amp; Spend</div>
+              <div class="font-mono text-xl sm:text-2xl font-bold tracking-wider text-white">•••• 4892</div>
+            </div>
+
+            <div class="flex justify-between items-end">
+              <div>
+                <div class="text-[10px] text-slate-400 uppercase">Cardholder</div>
+                <div class="text-xs font-bold text-white">ALEXANDRE CHEN</div>
+              </div>
+              <div class="text-right">
+                <div class="text-[10px] text-slate-400 uppercase">Yield Status</div>
+                <div class="text-xs font-bold text-emerald-400">2.00% ACTIVE</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust & Security Credentials -->
+  <section id="trust" class="py-16 bg-white border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <div class="lg:col-span-5 space-y-4">
+          <span class="text-xs font-extrabold uppercase tracking-wider text-[#008751]">Institutional Security</span>
+          <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">
+            Backed by Tier-1 Global Fintech Investors
+          </h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Venn has raised $26.5M+ from investors who backed Revolut, Wise, and Stripe. Deposits are held in trust with CDIC-member institutions (such as Bank of Montreal), and Venn is an approved Payment Services Provider with the Bank of Canada.
+          </p>
+          <div class="flex flex-wrap gap-2 pt-2 text-xs font-bold text-slate-700">
+            <span class="px-3 py-1.5 rounded-md bg-slate-100 border border-slate-200">Gradient (Google AI)</span>
+            <span class="px-3 py-1.5 rounded-md bg-slate-100 border border-slate-200">Left Lane Capital</span>
+            <span class="px-3 py-1.5 rounded-md bg-slate-100 border border-slate-200">Intact Ventures</span>
+            <span class="px-3 py-1.5 rounded-md bg-slate-100 border border-slate-200">XYZ Ventures</span>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="p-6 rounded-xl border border-slate-200 bg-slate-50/70">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-full bg-[#e6f4ea] text-[#008751] font-bold flex items-center justify-center">
+                MR
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-slate-900">Marc R.</h4>
+                <p class="text-xs text-slate-500">Founder, E-Commerce Studio (Toronto)</p>
+              </div>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed italic">
+              "We hold $250,000 across CAD and USD operating accounts. The Big 5 banks paid us $0. With Venn, we earn $5,000 a year simply by keeping our operating cash here, and team receipts match automatically."
+            </p>
+          </div>
+
+          <div class="p-6 rounded-xl border border-slate-200 bg-slate-50/70">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-full bg-[#e6f4ea] text-[#008751] font-bold flex items-center justify-center">
+                SL
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-slate-900">Sarah L.</h4>
+                <p class="text-xs text-slate-500">VP Finance, SaaS Platform (Vancouver)</p>
+              </div>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed italic">
+              "Switching from our legacy corporate card to Venn saved our finance team roughly 15 hours every month-end. Automated QuickBooks sync and the 2% interest credit made it an easy decision."
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Ready to Modernize Callout Section -->
+  <section class="py-16 sm:py-24 bg-gradient-to-b from-white to-[#f0fbf4]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-950 tracking-tight">
+        Ready to Modernize Your Business Banking?
+      </h2>
+      <p class="text-slate-600 text-base sm:text-lg max-w-xl mx-auto mt-4 font-normal">
+        Open your high-yield business account in less than 5 minutes online. No branches, no paperwork, and no lockups.
+      </p>
+      
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5">
+        <button onclick="openModal('Instant Account Setup')" class="w-full sm:w-auto px-8 py-4 rounded-lg font-bold text-white bg-[#008751] hover:bg-[#007545] transition-all shadow-md text-sm">
+          Open Account in 5 Minutes &rarr;
+        </button>
+        <button onclick="openModal('Schedule Team Demo (50-200 Employees)')" class="w-full sm:w-auto px-7 py-4 rounded-lg font-semibold text-slate-800 bg-white border border-slate-200 hover:border-slate-300 transition-all text-sm shadow-xs">
+          Schedule a 15-Min Demo
+        </button>
+      </div>
+
+      <p class="text-xs text-slate-400 mt-6">
+        Built for all Canadian incorporated businesses and sole proprietors • Zero monthly account fees • Cancel anytime
+      </p>
+    </div>
+  </section>
+
+  <footer class="bg-white border-t border-slate-200 py-12 text-slate-500 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-6">
+      
+      <div class="flex items-center gap-3">
+        <!-- Footer Venn Logo -->
+        <svg class="w-6 h-6" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50 4 V42" stroke="#008751" stroke-width="13" stroke-linecap="round"/>
+          <path d="M19 23 L44 45" stroke="#008751" stroke-width="13" stroke-linecap="round"/>
+          <path d="M81 23 L56 45" stroke="#008751" stroke-width="13" stroke-linecap="round"/>
+          <path d="M4 51 H36 C42 51, 44 42, 50 42 C56 42, 58 51, 64 51 H96" stroke="#008751" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M22 88 L43 56" stroke="#008751" stroke-width="13" stroke-linecap="round"/>
+          <path d="M78 88 L57 56" stroke="#008751" stroke-width="13" stroke-linecap="round"/>
+        </svg>
+        <span class="font-extrabold text-slate-900 font-sans text-base">venn</span>
+        <span class="text-slate-400">|</span>
+        <span>Venn Financial Technologies Inc. &copy; 2026</span>
+      </div>
+
+      <div class="flex gap-6 font-semibold">
+        <a href="#" class="hover:text-[#008751] transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-[#008751] transition-colors">Terms of Service</a>
+        <a href="#" class="hover:text-[#008751] transition-colors">Security Architecture</a>
+        <a href="#" class="hover:text-[#008751] transition-colors">CDIC Trust Details</a>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Interactive Modal (Bifurcated: Self-serve vs Mid-market Sales Flow) -->
+  <div id="lead-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs hidden items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+      
+      <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="mb-6">
+        <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-[#e6f4ea] text-[#008751] mb-2">
+          <i class="fa-solid fa-shield-check text-[11px]"></i>
+          <span>Secure Onboarding</span>
+        </div>
+        <h3 id="modal-title" class="text-2xl font-extrabold text-slate-950">Get Started with Venn</h3>
+        <p class="text-xs text-slate-500 mt-1">Join 15,000+ Canadian businesses modernizing their financial stack.</p>
+      </div>
+
+      <form id="lead-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Company Legal Name</label>
+          <input type="text" required placeholder="Acme Technologies Inc." class="w-full border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#008751] focus:ring-1 focus:ring-[#008751]">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Work Email</label>
+          <input type="email" required placeholder="founder@company.ca" class="w-full border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#008751] focus:ring-1 focus:ring-[#008751]">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Company Size (Employees)</label>
+          <select class="w-full border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#008751] focus:ring-1 focus:ring-[#008751]">
+            <option>1 – 10 employees (Self-Serve Setup)</option>
+            <option>11 – 50 employees (Self-Serve Setup)</option>
+            <option selected>50 – 200 employees (Mid-Market Priority Demo)</option>
+            <option>200+ employees (Enterprise Custom)</option>
+          </select>
+        </div>
+
+        <button type="submit" class="w-full py-3.5 rounded-lg font-bold text-sm bg-[#008751] hover:bg-[#007545] text-white transition-all shadow-sm mt-2">
+          Continue to Verification &rarr;
+        </button>
+
+        <p class="text-[11px] text-slate-400 text-center">
+          No credit check required. Digital verification takes less than 5 minutes.
+        </p>
+      </form>
+
+      <!-- Success Feedback State -->
+      <div id="form-success" class="hidden text-center py-6">
+        <div class="w-12 h-12 rounded-full bg-[#e6f4ea] text-[#008751] flex items-center justify-center mx-auto text-xl mb-3">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <h4 class="font-bold text-lg text-slate-900">Application Initiated!</h4>
+        <p class="text-xs text-slate-500 mt-2">We've redirected your secure session to Venn's automated verification portal.</p>
+        <button onclick="closeModal()" class="mt-4 px-5 py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-700">
+          Close Window
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Currency State
+    let activeCurrency = 'CAD';
+
+    function setCurrency(curr) {
+      activeCurrency = curr;
+      const cadBtn = document.getElementById('calc-cad-btn');
+      const usdBtn = document.getElementById('calc-usd-btn');
+
+      if (curr === 'CAD') {
+        cadBtn.className = "px-3 py-1 rounded-md bg-[#008751] text-white shadow-xs transition-all";
+        usdBtn.className = "px-3 py-1 rounded-md text-slate-600 hover:text-black transition-all";
+      } else {
+        usdBtn.className = "px-3 py-1 rounded-md bg-[#008751] text-white shadow-xs transition-all";
+        cadBtn.className = "px-3 py-1 rounded-md text-slate-600 hover:text-black transition-all";
+      }
+      runCalculator();
+    }
+
+    // Real-Time Interest & Fee Savings Calculator
+    function runCalculator() {
+      const balance = parseFloat(document.getElementById('calc-balance-slider').value);
+      const spend = parseFloat(document.getElementById('calc-spend-slider').value);
+      const sym = activeCurrency === 'CAD' ? '$' : 'US$';
+
+      // Updates display numbers
+      document.getElementById('calc-balance-display').innerText = sym + Number(balance).toLocaleString();
+      document.getElementById('calc-spend-display').innerText = sym + Number(spend).toLocaleString() + ' / mo';
+
+      // 2% Annual Interest
+      const annualInterest = Math.round(balance * 0.02);
+      // 1% Card Cashback over 12 months
+      const annualCashback = Math.round((spend * 0.01) * 12);
+      // Estimated Big 5 bank fee savings ($120/mo maintenance + wires = $1,440/yr)
+      const annualFeesAvoided = 1440;
+
+      const totalAdvantage = annualInterest + annualCashback + annualFeesAvoided;
+
+      document.getElementById('calc-interest-row').innerText = '+' + sym + annualInterest.toLocaleString() + ' / yr';
+      document.getElementById('calc-cashback-row').innerText = '+' + sym + annualCashback.toLocaleString() + ' / yr';
+      document.getElementById('calc-total-return').innerText = '+' + sym + totalAdvantage.toLocaleString();
+    }
+
+    // Comparison Matrix Toggle (Point 2 & 3 from slide)
+    function setComparison(type) {
+      const tabBig5 = document.getElementById('tab-big5');
+      const tabFloat = document.getElementById('tab-float');
+      const header = document.getElementById('comp-table-header');
+
+      const rInterest = document.getElementById('comp-row-interest');
+      const rExpense = document.getElementById('comp-row-expense');
+      const rCards = document.getElementById('comp-row-cards');
+      const rFees = document.getElementById('comp-row-fees');
+      const rFx = document.getElementById('comp-row-fx');
+      const rCdic = document.getElementById('comp-row-cdic');
+      const rSync = document.getElementById('comp-row-sync');
+
+      if (type === 'big5') {
+        tabBig5.className = "px-4 sm:px-6 py-2 rounded-lg text-xs sm:text-sm font-bold bg-[#008751] text-white shadow-xs transition-all";
+        tabFloat.className = "px-4 sm:px-6 py-2 rounded-lg text-xs sm:text-sm font-bold text-slate-600 hover:text-black transition-all";
+        header.innerText = "Big 5 Canadian Banks (RBC, TD, BMO, CIBC, Scotiabank)";
+
+        rInterest.innerText = "0.00% (or required term GIC lockups)";
+        rExpense.innerText = "None (requires 3rd-party software like Expensify)";
+        rCards.innerText = "Points with caps or <0.5% effective rebate";
+        rFees.innerText = "$50–$120 / month + $30–$45 per wire";
+        rFx.innerText = "Separate accounts + 2.5% to 3.5% FX markup";
+        rCdic.innerText = "CDIC Member Institution";
+        rSync.innerText = "Lagged bank feeds with regular token disconnects";
+      } else {
+        tabFloat.className = "px-4 sm:px-6 py-2 rounded-lg text-xs sm:text-sm font-bold bg-[#008751] text-white shadow-xs transition-all";
+        tabBig5.className = "px-4 sm:px-6 py-2 rounded-lg text-xs sm:text-sm font-bold text-slate-600 hover:text-black transition-all";
+        header.innerText = "Float Financial (Canadian Corporate Card)";
+
+        rInterest.innerText = "0% to 1.5% (tiered, requires balance thresholds)";
+        rExpense.innerText = "Native spend management included";
+        rCards.innerText = "Prepaid card model; points-based rewards";
+        rFees.innerText = "Free basic or $99–$299/mo for automated features";
+        rFx.innerText = "Standard FX markup on foreign card transactions";
+        rCdic.innerText = "Partner trust structure";
+        rSync.innerText = "Two-way accounting sync available";
+      }
+    }
+
+    // Modal Control Functions
+    function openModal(context) {
+      document.getElementById('modal-title').innerText = context || "Get Started with Venn";
+      document.getElementById('lead-modal').classList.remove('hidden');
+      document.getElementById('lead-modal').classList.add('flex');
+    }
+
+    function closeModal() {
+      document.getElementById('lead-modal').classList.add('hidden');
+      document.getElementById('lead-modal').classList.remove('flex');
+      document.getElementById('lead-form').classList.remove('hidden');
+      document.getElementById('form-success').classList.add('hidden');
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      document.getElementById('lead-form').classList.add('hidden');
+      document.getElementById('form-success').classList.remove('hidden');
+    }
+
+    function toggleMobileNav() {
+      const menu = document.getElementById('mobile-nav-menu');
+      const icon = document.getElementById('mobile-menu-icon');
+      const btn = document.getElementById('mobile-menu-toggle');
+      const isHidden = menu.classList.contains('hidden');
+
+      if (isHidden) {
+        menu.classList.remove('hidden');
+        icon.className = 'fa-solid fa-xmark text-base';
+        btn.setAttribute('aria-expanded', 'true');
+      } else {
+        menu.classList.add('hidden');
+        icon.className = 'fa-solid fa-bars text-base';
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    }
+
+    // Initialize on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      runCalculator();
+    });
+  </script>
+</body>
+</html>
